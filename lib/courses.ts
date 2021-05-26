@@ -24,6 +24,6 @@ export function getAllCourseIds() {
   });
 }
 
-export function getCourseData(courseId: string): TFullCourseData | undefined {
+export function getCourseData(courseId: string): TCourseData | undefined {
   return getAllCourses().find((cd: TCourseData) => cd.id === courseId);
 }

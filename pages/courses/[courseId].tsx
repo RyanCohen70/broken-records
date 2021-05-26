@@ -19,7 +19,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const courseData = await getCourseData(params.courseId);
+  if (!params) return { props: {} };
+
+  const courseData = await getCourseData(params.courseId as any);
   const courses = getAllCourses();
   return {
     props: {
