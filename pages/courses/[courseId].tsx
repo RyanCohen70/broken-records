@@ -31,6 +31,57 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
+type TTrackData = {
+  readonly name: string;
+  readonly artistNames: string[];
+};
+
+type TTrackProps = {
+  readonly track: TTrackData;
+};
+
+function Track({ track }: TTrackProps) {
+  const { name, artistNames } = track;
+  return (
+    <div className='track'>
+      <div className='track-name'>{name}</div>
+      <div className='track-artists'>{artistNames.join(', ')}</div>
+    </div>
+  );
+}
+
+type TTrackListProps = {
+  readonly tracks: TTrackData[];
+};
+
+function TrackList({ tracks }: TTrackListProps) {
+  return (
+    <div className='tracks'>
+      {tracks.map(track => (
+        <Track track={track} />
+      ))}
+    </div>
+  );
+}
+
+type TClassSectionProps = {
+  readonly year: string;
+  readonly termLabel: string;
+  readonly tracks: TTrackData[];
+};
+
+function ClassSection({ year, termLabel, tracks }: TClassSectionProps) {
+  return (
+    <div className='music-class-section'>
+      <h3>
+        <span className='section-title-primary'>{year}</span>
+        <span className='section-title-secondary'>{termLabel}</span>
+      </h3>
+      <TrackList tracks={tracks} />
+    </div>
+  );
+}
+
 type TCourseProps = {
   readonly courseData: TCourseData;
   readonly courses: TCourseData[];
@@ -62,102 +113,6 @@ export default function Course({ courseData, courses }: TCourseProps) {
         <div className='column main'>
           <h2>{courseData.name}</h2>
           <p>{courseData.description}</p>
-          <div className='music-class-section'>
-            <h3>
-              <span className='section-title-primary'>2019-20</span>
-              <span className='section-title-secondary'>Fall</span>
-            </h3>
-            <div className='tracks'>
-              <div className='track'>
-                <div className='track-name'>Skipping Thru the Meadows</div>
-                <div className='track-artists'>
-                  Alison C, Carlos X, James Y, Wendy M
-                </div>
-              </div>
-              <div className='track'>
-                <div className='track-name'>Ironside</div>
-                <div className='track-artists'>
-                  Alison C, Carlos X, James Y, Wendy M
-                </div>
-              </div>
-              <div className='track'>
-                <div className='track-name'>Jambalaya</div>
-                <div className='track-artists'>
-                  Alison C, Carlos X, James Y, Wendy M
-                </div>
-              </div>
-              <div className='track'>
-                <div className='track-name'>Song about a Song</div>
-                <div className='track-artists'>
-                  Alison C, Carlos X, James Y, Wendy M
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='music-class-section'>
-            <h3>
-              <span className='section-title-primary'>2018-19</span>
-              <span className='section-title-secondary'>Fall</span>
-            </h3>
-            <div className='tracks'>
-              <div className='track'>
-                <div className='track-name'>Skipping Thru the Meadows</div>
-                <div className='track-artists'>
-                  Alison C, Carlos X, James Y, Wendy M
-                </div>
-              </div>
-              <div className='track'>
-                <div className='track-name'>Ironside</div>
-                <div className='track-artists'>
-                  Alison C, Carlos X, James Y, Wendy M
-                </div>
-              </div>
-              <div className='track'>
-                <div className='track-name'>Jambalaya</div>
-                <div className='track-artists'>
-                  Alison C, Carlos X, James Y, Wendy M
-                </div>
-              </div>
-              <div className='track'>
-                <div className='track-name'>Song about a Song</div>
-                <div className='track-artists'>
-                  Alison C, Carlos X, James Y, Wendy M
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='music-class-section'>
-            <h3>
-              <span className='section-title-primary'>2016-17</span>
-              <span className='section-title-secondary'>Spring</span>
-            </h3>
-            <div className='tracks'>
-              <div className='track'>
-                <div className='track-name'>Skipping Thru the Meadows</div>
-                <div className='track-artists'>
-                  Alison C, Carlos X, James Y, Wendy M
-                </div>
-              </div>
-              <div className='track'>
-                <div className='track-name'>Ironside</div>
-                <div className='track-artists'>
-                  Alison C, Carlos X, James Y, Wendy M
-                </div>
-              </div>
-              <div className='track'>
-                <div className='track-name'>Jambalaya</div>
-                <div className='track-artists'>
-                  Alison C, Carlos X, James Y, Wendy M
-                </div>
-              </div>
-              <div className='track'>
-                <div className='track-name'>Song about a Song</div>
-                <div className='track-artists'>
-                  Alison C, Carlos X, James Y, Wendy M
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
         )
       </div>

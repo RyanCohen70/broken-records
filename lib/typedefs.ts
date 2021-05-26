@@ -12,6 +12,6 @@ export type TCourseData = {
   readonly description: string;
 };
 
-export type TFullCourseData = TCourseData & {
+export type TCourseFullData = TCourseData & {
   readonly classes: TClassData[];
 };
