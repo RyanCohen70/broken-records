@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const dotenv = require('dotenv');
 const Airtable = require('airtable');
+const _ = require('lodash');
 
 dotenv.config();
 
@@ -26,7 +27,8 @@ async function fetchRecords(tableName, fields) {
     const obj = {};
     for (const field of fields) {
       const value = record[field];
-      obj[field] = Array.isArray(value) ? value[0] : value;
+      const key = _.camelCase(field);
+      obj[key] = Array.isArray(value) ? value[0] : value;
     }
     return obj;
   }
