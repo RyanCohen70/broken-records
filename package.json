@@ -1,0 +1,25 @@
+{
+  "name": "brokenrecords",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "airtable:pull": "node scripts/airtable-pull.js"
+  },
+  "dependencies": {
+    "@types/airtable": "^0.10.1",
+    "airtable": "^0.11.1",
+    "dotenv": "^10.0.0",
+    "next": "10.2.3",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "sass": "^1.34.0",
+    "ts-node": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "17.0.6",
+    "typescript": "4.2.4"
+  }
+}
