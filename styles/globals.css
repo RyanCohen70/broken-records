@@ -1,6 +1,6 @@
 * {
   margin: 0;
-  font-family:Lato, sans-serif;
+  font-family: Lato, sans-serif;
   color: #333;
 }
 a {
@@ -11,15 +11,14 @@ h1 {
   font-size: 48px;
   font-weight: 900;
   padding: 15px;
-  color: peachpuff; 
+  color: peachpuff;
   background-image: url('/HeaderBackground.jpg');
-  background-color:powderblue;
+  background-color: powderblue;
 }
 h2 {
 }
 h3 {
   margin: 30px 0 10px;
-  
 }
 p {
   margin: 10px 0;
@@ -29,7 +28,7 @@ hr {
   border-color: powderblue;
 }
 .container {
-  display:flex;
+  display: flex;
   justify-content: flex-start;
 }
 .column {
@@ -42,7 +41,7 @@ hr {
 .nav {
   background-color: peachpuff;
 }
-.selected{
+.selected {
   font-weight: 700;
 }
 .nav-menu1 {
@@ -58,7 +57,6 @@ hr {
   cursor: pointer;
 }
 .nav-menu2 {
-
 }
 .nav-menu2-item {
   font-size: 16px;
@@ -72,18 +70,19 @@ hr {
   font-weight: 700;
 }
 .section-title-secondary {
+  margin-left: 5px;
   font-weight: 400;
 }
 .tracks {
   margin-left: 20px;
 }
 .track {
- margin: 10px 0;
+  margin: 10px 0;
 }
 .track-name {
   font-weight: 400;
   font-size: 16px;
-  color: #333
+  color: #333;
 }
 .track-artists {
   font-weight: 400;

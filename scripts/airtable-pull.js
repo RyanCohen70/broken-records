@@ -43,10 +43,34 @@ async function constructTable(tableName, fields) {
 }
 
 const tables = [
-  { name: 'school_years', fields: ['id'] },
-  { name: 'school_terms', fields: ['id', 'school_year_id'] },
-  { name: 'courses', fields: ['id', 'name', 'description'] },
+  {
+    name: 'tracks',
+    fields: [
+      'id',
+      'name',
+      'filename',
+      'school_term_id',
+      'school_year_id',
+      'class_id',
+      'genre_id',
+      'is_mastered',
+    ],
+  },
+  {
+    name: 'students',
+    fields: ['id', 'first_name', 'last_name', 'graduation_year'],
+  },
+  { name: 'performances', fields: ['student_id', 'track_id'] },
+
+  { name: 'courses', fields: ['id', 'label', 'description'] },
   { name: 'classes', fields: ['id', 'course_id', 'school_term_id'] },
+  { name: 'school_years', fields: ['id'] },
+  {
+    name: 'school_terms',
+    fields: ['id', 'school_year_id', 'term_label', 'term_index'],
+  },
+  { name: 'venues', fields: ['id', 'label', 'school_term_id'] },
+  { name: 'genres', fields: ['id', 'label'] },
 ];
 
 for (const table of tables) {

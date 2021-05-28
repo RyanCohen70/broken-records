@@ -1,14 +1,16 @@
 import type { GetStaticProps, GetStaticPaths } from 'next';
-import type { TCourseData } from '../../lib/typedefs';
+import type { TTrackModel, TCourseModel } from '../../lib/typedefs/models';
+import type { TCourseTable } from '../../lib/typedefs/tables';
+
 import Layout from '../../components/layout';
 import { Nav, TSecondaryNavEntry } from '../../components/Nav';
-import { Main } from '../../components/Main';
+import { calcPrimaryNavEntries } from '../../lib/nav';
+import { TrackList } from '../../components/track';
 import {
   getAllCourseIds,
   getAllCourses,
-  getCourseData,
+  getCourseModel,
 } from '../../lib/courses';
-import { calcPrimaryNavEntries } from '../../lib/nav';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllCourseIds();
@@ -21,60 +23,27 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (!params) return { props: {} };
 
-  const courseData = await getCourseData(params.courseId as any);
+  const courseModel = await getCourseModel(params.courseId as any);
   const courses = getAllCourses();
   return {
     props: {
-      courseData,
+      courseModel,
       courses,
     },
   };
 };
 
-type TTrackData = {
-  readonly name: string;
-  readonly artistNames: string[];
-};
-
-type TTrackProps = {
-  readonly track: TTrackData;
-};
-
-function Track({ track }: TTrackProps) {
-  const { name, artistNames } = track;
-  return (
-    <div className='track'>
-      <div className='track-name'>{name}</div>
-      <div className='track-artists'>{artistNames.join(', ')}</div>
-    </div>
-  );
-}
-
-type TTrackListProps = {
-  readonly tracks: TTrackData[];
-};
-
-function TrackList({ tracks }: TTrackListProps) {
-  return (
-    <div className='tracks'>
-      {tracks.map(track => (
-        <Track track={track} />
-      ))}
-    </div>
-  );
-}
-
 type TClassSectionProps = {
-  readonly year: string;
+  readonly yearLabel: string;
   readonly termLabel: string;
-  readonly tracks: TTrackData[];
+  readonly tracks: TTrackModel[];
 };
 
-function ClassSection({ year, termLabel, tracks }: TClassSectionProps) {
+function ClassSection({ yearLabel, termLabel, tracks }: TClassSectionProps) {
   return (
     <div className='music-class-section'>
       <h3>
-        <span className='section-title-primary'>{year}</span>
+        <span className='section-title-primary'>{yearLabel}</span>
         <span className='section-title-secondary'>{termLabel}</span>
       </h3>
       <TrackList tracks={tracks} />
@@ -83,19 +52,20 @@ function ClassSection({ year, termLabel, tracks }: TClassSectionProps) {
 }
 
 type TCourseProps = {
-  readonly courseData: TCourseData;
-  readonly courses: TCourseData[];
+  readonly courseModel: TCourseModel;
+  readonly courses: TCourseTable[];
 };
-export default function Course({ courseData, courses }: TCourseProps) {
+
+export default function Course({ courseModel, courses }: TCourseProps) {
   function secondaryNavEntryFromCourse({
     id,
-    name,
-  }: TCourseData): TSecondaryNavEntry {
+    label,
+  }: TCourseTable): TSecondaryNavEntry {
     return {
       id,
-      label: name,
+      label,
       path: `/courses/${id}`,
-      isSelected: courseData.id === id,
+      isSelected: courseModel.id === id,
     };
   }
   function handleClickPrimary() {
@@ -111,8 +81,18 @@ export default function Course({ courseData, courses }: TCourseProps) {
           onClickPrimary={handleClickPrimary}
         />
         <div className='column main'>
-          <h2>{courseData.name}</h2>
-          <p>{courseData.description}</p>
+          <h2>{courseModel.label}</h2>
+          <p>{courseModel.description}</p>
+          <div>
+            {courseModel.classes.map(c => (
+              <ClassSection
+                key={c.id}
+                yearLabel={c.yearLabel}
+                termLabel={c.termLabel}
+                tracks={c.tracks}
+              />
+            ))}
+          </div>
         </div>
         )
       </div>
