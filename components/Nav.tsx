@@ -1,46 +1,47 @@
 import * as React from 'react';
 import Link from 'next/link';
+import { calcPrimaryNavEntries } from '../lib/nav';
 
 // ------------------------------------------------------------------------
 export type TPrimaryNavEntry = {
-  id: string;
-  label: string;
-  isSelected: boolean;
+  readonly id: string;
+  readonly label: string;
+  readonly isSelected: boolean;
+  readonly path: string;
 };
 
-type TPrimaryNavEntryProps = TPrimaryNavEntry & {
-  onClick: (id: string) => void;
-};
+type TPrimaryNavEntryProps = TPrimaryNavEntry;
 
 function PrimaryNavEntry({
   id,
   label,
   isSelected,
-  onClick,
+  path,
 }: TPrimaryNavEntryProps) {
   const className = isSelected ? 'nav-menu1-item selected' : 'nav-menu1-item';
   return (
-    <div className={className} onClick={() => onClick(id)}>
-      {label}
+    <div className={className}>
+      <Link href={path}>
+        <a>{label}</a>
+      </Link>
     </div>
   );
 }
 
 type TPrimaryNavProps = {
-  entries: TPrimaryNavEntry[];
-  selectedId: string;
-  onClick: (id: string) => void;
+  readonly entries: TPrimaryNavEntry[];
+  readonly selectedId: string;
 };
-function PrimaryNav({ entries, selectedId, onClick }: TPrimaryNavProps) {
+function PrimaryNav({ entries, selectedId }: TPrimaryNavProps) {
   return (
     <div className='nav-menu1'>
       {entries.map(entry => (
         <PrimaryNavEntry
           key={entry.id}
-          onClick={onClick}
           id={entry.id}
           label={entry.label}
           isSelected={selectedId === entry.id}
+          path={entry.path}
         />
       ))}
     </div>
@@ -49,10 +50,10 @@ function PrimaryNav({ entries, selectedId, onClick }: TPrimaryNavProps) {
 
 // ------------------------------------------------------------------------
 export type TSecondaryNavEntry = {
-  id: string;
-  label: string;
-  path: string;
-  isSelected: boolean;
+  readonly id: string;
+  readonly label: string;
+  readonly path: string;
+  readonly isSelected: boolean;
 };
 
 type TSecondaryNavEntryProps = TSecondaryNavEntry;
@@ -73,7 +74,7 @@ function SecondaryNavEntry({
 }
 
 type TSecondaryNavProps = {
-  entries: TSecondaryNavEntry[];
+  readonly entries: TSecondaryNavEntry[];
 };
 
 function SecondaryNav({ entries }: TSecondaryNavProps) {
@@ -95,23 +96,15 @@ function SecondaryNav({ entries }: TSecondaryNavProps) {
 // ------------------------------------------------------------------------
 
 type TNavProps = {
-  primaryNavEntries: TPrimaryNavEntry[];
-  secondaryNavEntries: TSecondaryNavEntry[];
-  primarySelectedId: string;
-  onClickPrimary: (id: string) => void;
+  readonly secondaryNavEntries: TSecondaryNavEntry[];
+  readonly primarySelectedId: string;
 };
-export function Nav({
-  primaryNavEntries,
-  secondaryNavEntries,
-  primarySelectedId,
-  onClickPrimary,
-}: TNavProps) {
+export function Nav({ secondaryNavEntries, primarySelectedId }: TNavProps) {
   return (
     <div className='column nav'>
       <PrimaryNav
-        entries={primaryNavEntries}
+        entries={calcPrimaryNavEntries(primarySelectedId)}
         selectedId={primarySelectedId}
-        onClick={onClickPrimary}
       />
       <hr />
       <SecondaryNav entries={secondaryNavEntries} />

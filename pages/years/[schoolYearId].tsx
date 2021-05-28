@@ -68,17 +68,12 @@ export default function SchoolYear({
       isSelected: schoolYearModel.id === id,
     };
   }
-  function handleClickPrimary() {
-    console.log('handleClickPrimary:turkeyman is great');
-  }
   return (
     <Layout>
       <div className='container'>
         <Nav
-          primaryNavEntries={calcPrimaryNavEntries('year')}
           secondaryNavEntries={schoolYears.map(secondaryNavEntryFromCourse)}
           primarySelectedId={'year'}
-          onClickPrimary={handleClickPrimary}
         />
         <div className='column main'>
           <h2>{schoolYearModel.id}</h2>

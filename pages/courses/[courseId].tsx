@@ -68,17 +68,12 @@ export default function Course({ courseModel, courses }: TCourseProps) {
       isSelected: courseModel.id === id,
     };
   }
-  function handleClickPrimary() {
-    console.log('handleClickPrimary:turkeyman is great');
-  }
   return (
     <Layout>
       <div className='container'>
         <Nav
-          primaryNavEntries={calcPrimaryNavEntries('class')}
           secondaryNavEntries={courses.map(secondaryNavEntryFromCourse)}
           primarySelectedId={'class'}
-          onClickPrimary={handleClickPrimary}
         />
         <div className='column main'>
           <h2>{courseModel.label}</h2>
