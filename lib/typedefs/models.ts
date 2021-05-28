@@ -41,11 +41,12 @@ export type TCourseModel = {
 };
 
 export type TSchoolYearModel = {
-  readonly label: string;
+  readonly id: TSchoolYearId;
   readonly terms: TSchoolTermModel[];
 };
 
 export type TSchoolTermModel = {
+  readonly id: TSchoolTermId;
   readonly label: string;
   readonly tracks: TTrackModel[];
 };

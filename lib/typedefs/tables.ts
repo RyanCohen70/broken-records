@@ -42,8 +42,6 @@ export type TClassTable = {
   readonly id: TClassId;
   readonly courseId: TCourseId;
   readonly schoolTermId: TSchoolTermId;
-  //readonly yearLabel: TSchoolYearId;
-  //readonly termLabel: string;
 };
 
 export type TSchoolYearTable = {
@@ -54,7 +52,7 @@ export type TSchoolTermTable = {
   readonly id: TSchoolTermId;
   readonly schoolYearId: TSchoolYearId;
   readonly termLabel: string;
-  readonly index: number;
+  readonly termIndex: number;
 };
 
 export type TVenueTable = {

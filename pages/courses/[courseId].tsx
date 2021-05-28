@@ -94,7 +94,6 @@ export default function Course({ courseModel, courses }: TCourseProps) {
             ))}
           </div>
         </div>
-        )
       </div>
     </Layout>
   );
