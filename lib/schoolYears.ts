@@ -36,9 +36,13 @@ function getSchoolTermModel(schoolYearId: TSchoolYearId): TSchoolTermModel[] {
     return {
       id: term.id,
       label: term.termLabel,
-      tracks: getTrackModel('schoolTermId', term.id),
+      tracks: getTrackModel('schoolTermModel', 'schoolTermId', term.id),
     };
   });
+  console.log(
+    '*schoolTermModel Tracks =>',
+    schoolTermModel.forEach(term => term.tracks)
+  );
   return schoolTermModel;
 }
 

@@ -11,7 +11,9 @@ const performances = loadData<TPerformanceTable[]>('performances');
 const artists = loadData<TStudentTable[]>('students');
 
 function getArtistsforTracks(track: TTrackTable): string[] {
-  const p = performances.find((p: TPerformanceTable) => p.trackId === track.id);
+  const p = performances.find(
+    (p: TPerformanceTable) => p.trackTitle === track.title
+  );
   if (!p) return [];
 
   artists.filter((a: TStudentTable) => a.id === p.studentId);
@@ -20,14 +22,17 @@ function getArtistsforTracks(track: TTrackTable): string[] {
 }
 
 export function getTrackModel(
+  location: string,
   field: keyof TTrackTable,
   value: any
 ): TTrackModel[] {
   const filteredTracks: TTrackTable[] = tracks
     .filter((track: TTrackTable) => track[field] === value)
-    .sort((a, b) => (a.id > b.id ? 1 : -1));
-  return filteredTracks.map(track => ({
+    .sort((a, b) => (a.title > b.title ? 1 : -1));
+  const trackModel: TTrackModel[] = filteredTracks.map(track => ({
     ...track,
     artistNames: getArtistsforTracks(track),
   }));
+  console.log(location, 'trackModel =>', trackModel);
+  return trackModel;
 }

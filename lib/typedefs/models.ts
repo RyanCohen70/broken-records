@@ -58,9 +58,12 @@ export type TVenueModel = {
 };
 
 export type TGenreModel = {
+  readonly id: TGenreId;
   readonly label: string;
-  readonly schoolYears: {
-    readonly label: string;
-    readonly tracks: TTrackModel[];
-  }[];
+  readonly schoolYears: TSchoolYearSubGenreModel[];
+};
+
+export type TSchoolYearSubGenreModel = {
+  readonly id: TSchoolYearId;
+  readonly tracks: TTrackModel[];
 };

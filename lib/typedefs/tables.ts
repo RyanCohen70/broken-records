@@ -1,5 +1,4 @@
 import {
-  TTrackId,
   TStudentId,
   TCourseId,
   TClassId,
@@ -11,9 +10,9 @@ import {
 } from './ids';
 
 export type TTrackTable = {
-  readonly id: TTrackId;
-  readonly name: string;
+  readonly title: string;
   readonly filename: string;
+  readonly schoolYearId: TSchoolYearId;
   readonly schoolTermId: TSchoolTermId;
   readonly classId: TClassId;
   readonly genreId: TGenreId;
@@ -29,7 +28,7 @@ export type TStudentTable = {
 
 export type TPerformanceTable = {
   readonly studentId: TStudentId;
-  readonly trackId: TTrackId;
+  readonly trackTitle: 'string';
 };
 
 export type TCourseTable = {

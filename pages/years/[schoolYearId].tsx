@@ -4,7 +4,6 @@ import type { TSchoolYearTable } from '../../lib/typedefs/tables';
 
 import Layout from '../../components/layout';
 import { Nav, TSecondaryNavEntry } from '../../components/Nav';
-import { calcPrimaryNavEntries } from '../../lib/nav';
 import { TrackList } from '../../components/track';
 import {
   getAllSchoolYearIds,

@@ -44,11 +44,13 @@ function getClassModel(courseId: TCourseId): TClassModel[] {
   const classesForCourse: TClassTable[] = getClassesForCourse(courseId);
   const classModel: TClassModel[] = classesForCourse.map(c => {
     const schoolTerm = getSchoolTermForClass(c);
+    const tracks = getTrackModel('classModel', 'classId', c.id);
+    console.log('course Tracks for', c.id, '=>', tracks);
     return {
       id: c.id,
       yearLabel: schoolTerm?.schoolYearId ?? ('' as TSchoolYearId),
       termLabel: schoolTerm?.termLabel ?? '',
-      tracks: getTrackModel('classId', c.id),
+      tracks: tracks,
     };
   });
   return classModel;

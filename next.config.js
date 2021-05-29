@@ -16,6 +16,7 @@ const schoolYears = loadData('school_years').sort((a, b) =>
 const courses = loadData('courses').sort((a, b) =>
   a.label > b.label ? 1 : -1
 );
+const genres = loadData('genres').sort((a, b) => (a.id > b.id ? 1 : -1));
 
 async function redirects() {
   return [
@@ -27,6 +28,11 @@ async function redirects() {
     {
       source: '/years',
       destination: `/years/${schoolYears[0].id}`,
+      permanent: true,
+    },
+    {
+      source: '/genres',
+      destination: `/genres/${genres[0].id}`,
       permanent: true,
     },
   ];

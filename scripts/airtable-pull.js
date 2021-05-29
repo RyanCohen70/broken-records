@@ -46,8 +46,7 @@ const tables = [
   {
     name: 'tracks',
     fields: [
-      'id',
-      'name',
+      'title',
       'filename',
       'school_term_id',
       'school_year_id',
@@ -60,7 +59,7 @@ const tables = [
     name: 'students',
     fields: ['id', 'first_name', 'last_name', 'graduation_year'],
   },
-  { name: 'performances', fields: ['student_id', 'track_id'] },
+  { name: 'performances', fields: ['student_id', 'track_title'] },
 
   { name: 'courses', fields: ['id', 'label', 'description'] },
   { name: 'classes', fields: ['id', 'course_id', 'school_term_id'] },

@@ -5,10 +5,10 @@ type TTrackProps = {
 };
 
 function Track({ track }: TTrackProps) {
-  const { name, artistNames } = track;
+  const { title, artistNames } = track;
   return (
     <div className='track'>
-      <div className='track-name'>{name}</div>
+      <div className='track-name'>{title}</div>
       <div className='track-artists'>{artistNames.join(', ')}</div>
     </div>
   );
