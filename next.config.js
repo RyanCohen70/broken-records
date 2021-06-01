@@ -10,6 +10,8 @@ function loadData(tableName) {
   return records;
 }
 
+// -------------------------------------------------------
+
 const schoolYears = loadData('school_years').sort((a, b) =>
   a.id > b.id ? -1 : 1
 );
@@ -17,6 +19,10 @@ const courses = loadData('courses').sort((a, b) =>
   a.label > b.label ? 1 : -1
 );
 const genres = loadData('genres').sort((a, b) => (a.id > b.id ? 1 : -1));
+
+const venues = loadData('venues').sort((a, b) => (a.id > b.id ? -1 : 1));
+
+// -------------------------------------------------------
 
 async function redirects() {
   return [
@@ -33,6 +39,11 @@ async function redirects() {
     {
       source: '/genres',
       destination: `/genres/${genres[0].id}`,
+      permanent: true,
+    },
+    {
+      source: '/venues',
+      destination: `/venues/${venues[0].id}`,
       permanent: true,
     },
   ];

@@ -33,7 +33,7 @@ type TYearSectionProps = {
   readonly tracks: TTrackModel[];
 };
 
-function ClassSection({ yearLabel, tracks }: TYearSectionProps) {
+function YearSection({ yearLabel, tracks }: TYearSectionProps) {
   return (
     <div className='music-class-section'>
       <h3>
@@ -72,7 +72,7 @@ export default function Genre({ genreModel, genres }: TGenreProps) {
           <h2>{genreModel.label}</h2>
           <div>
             {genreModel.schoolYears.map(year => (
-              <ClassSection
+              <YearSection
                 key={year.id}
                 yearLabel={year.id}
                 tracks={year.tracks}

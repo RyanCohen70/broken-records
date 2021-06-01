@@ -1,10 +1,10 @@
-import { TSchoolYearId } from './typedefs/ids';
+import type { TSchoolYearId } from './typedefs/ids';
 import type { TSchoolTermTable, TSchoolYearTable } from './typedefs/tables';
 import type { TSchoolTermModel, TSchoolYearModel } from './typedefs/models';
 import { getTrackModel } from './tracks';
 import { loadData } from './loadData';
 
-export const schoolYears = loadData<TSchoolYearTable[]>('school_years');
+const schoolYears = loadData<TSchoolYearTable[]>('school_years');
 const schoolTerms = loadData<TSchoolTermTable[]>('school_terms');
 
 export function getAllSchoolYearIds() {
@@ -39,10 +39,6 @@ function getSchoolTermModel(schoolYearId: TSchoolYearId): TSchoolTermModel[] {
       tracks: getTrackModel('schoolTermModel', 'schoolTermId', term.id),
     };
   });
-  console.log(
-    '*schoolTermModel Tracks =>',
-    schoolTermModel.forEach(term => term.tracks)
-  );
   return schoolTermModel;
 }
 

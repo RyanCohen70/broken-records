@@ -55,6 +55,13 @@ export type TVenueModel = {
   readonly id: TVenueId;
   readonly label: string;
   readonly schoolTermId: TSchoolTermId;
+  readonly classes: TClassSubVenueModel[];
+};
+
+export type TClassSubVenueModel = {
+  readonly id: TClassId;
+  readonly label: string;
+  readonly tracks: TTrackModel[];
 };
 
 export type TGenreModel = {

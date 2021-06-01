@@ -1,4 +1,4 @@
-import type { TCourseId } from './typedefs/ids';
+import type { TCourseId, TSchoolYearId } from './typedefs/ids';
 import type {
   TClassTable,
   TCourseTable,
@@ -7,9 +7,8 @@ import type {
 import type { TClassModel, TCourseModel } from './typedefs/models';
 import { getTrackModel } from './tracks';
 import { loadData } from './loadData';
-import { TSchoolYearId } from './typedefs/ids';
 
-export const courses = loadData<TCourseTable[]>('courses');
+const courses = loadData<TCourseTable[]>('courses');
 const classes = loadData<TClassTable[]>('classes');
 const schoolTerms = loadData<TSchoolTermTable[]>('school_terms');
 
@@ -45,7 +44,7 @@ function getClassModel(courseId: TCourseId): TClassModel[] {
   const classModel: TClassModel[] = classesForCourse.map(c => {
     const schoolTerm = getSchoolTermForClass(c);
     const tracks = getTrackModel('classModel', 'classId', c.id);
-    console.log('course Tracks for', c.id, '=>', tracks);
+    //onsole.log('course Tracks for', c.id, '=>', tracks);
     return {
       id: c.id,
       yearLabel: schoolTerm?.schoolYearId ?? ('' as TSchoolYearId),

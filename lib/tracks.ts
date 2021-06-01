@@ -33,6 +33,6 @@ export function getTrackModel(
     ...track,
     artistNames: getArtistsforTracks(track),
   }));
-  console.log(location, 'trackModel =>', trackModel);
+  //console.log(location, 'trackModel =>', trackModel);
   return trackModel;
 }
