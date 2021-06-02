@@ -55,6 +55,7 @@ export type TVenueModel = {
   readonly id: TVenueId;
   readonly label: string;
   readonly schoolTermId: TSchoolTermId;
+  readonly termYearLabel: string;
   readonly classes: TClassSubVenueModel[];
 };
 

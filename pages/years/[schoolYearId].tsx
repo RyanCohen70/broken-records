@@ -75,7 +75,7 @@ export default function SchoolYear({
           primarySelectedId={'year'}
         />
         <div className='column main'>
-          <h2>{schoolYearModel.id}</h2>
+          <h2 className='main-title-primary'>{schoolYearModel.id}</h2>
           <div>
             {schoolYearModel.terms.map(term => (
               <SchoolTermSection

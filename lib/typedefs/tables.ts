@@ -12,9 +12,9 @@ import {
 export type TTrackTable = {
   readonly title: string;
   readonly filename: string;
-  readonly schoolYearId: TSchoolYearId;
-  readonly schoolTermId: TSchoolTermId;
-  readonly classId: TClassId;
+  readonly schoolYearId: TSchoolYearId | undefined;
+  readonly schoolTermId: TSchoolTermId | undefined;
+  readonly classId: TClassId | undefined;
   readonly genreId: TGenreId;
   readonly isMastered: boolean;
 };

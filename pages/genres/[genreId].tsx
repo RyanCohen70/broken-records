@@ -69,7 +69,7 @@ export default function Genre({ genreModel, genres }: TGenreProps) {
           primarySelectedId={'genre'}
         />
         <div className='column main'>
-          <h2>{genreModel.label}</h2>
+          <h2 className='main-title-primary'>{genreModel.label}</h2>
           <div>
             {genreModel.schoolYears.map(year => (
               <YearSection

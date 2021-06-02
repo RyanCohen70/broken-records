@@ -75,7 +75,7 @@ export default function Course({ courseModel, courses }: TCourseProps) {
           primarySelectedId={'class'}
         />
         <div className='column main'>
-          <h2>{courseModel.label}</h2>
+          <h2 className='main-title-primary'>{courseModel.label}</h2>
           <p>{courseModel.description}</p>
           <div>
             {courseModel.classes.map(c => (

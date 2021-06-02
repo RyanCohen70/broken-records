@@ -69,7 +69,12 @@ export default function Venue({ venueModel, venues }: TVenueProps) {
           primarySelectedId={'venue'}
         />
         <div className='column main'>
-          <h2>{venueModel.label}</h2>
+          <h2>
+            <span className='main-title-primary'> {venueModel.label}</span>
+            <span className='main-title-secondary'>
+              {venueModel.termYearLabel}
+            </span>
+          </h2>
           <div>
             {venueModel.classes.map(c => (
               <ClassSection key={c.id} label={c.label} tracks={c.tracks} />
