@@ -8,7 +8,9 @@ import type { TClassModel, TCourseModel } from './typedefs/models';
 import { getTrackModel } from './tracks';
 import { loadData } from './loadData';
 
-const courses = loadData<TCourseTable[]>('courses');
+const courses = loadData<TCourseTable[]>('courses').filter(
+  (course: TCourseTable) => course.id !== 'independent'
+);
 const classes = loadData<TClassTable[]>('classes');
 const schoolTerms = loadData<TSchoolTermTable[]>('school_terms');
 
@@ -29,7 +31,7 @@ export function getAllCourses() {
 function getClassesForCourse(courseId: TCourseId): TClassTable[] {
   return classes
     .filter((cld: TClassTable) => cld.courseId === courseId)
-    .sort((a, b) => (a.schoolTermId > b.schoolTermId ? 1 : -1));
+    .sort((a, b) => (a.schoolTermId > b.schoolTermId ? -1 : 1));
 }
 
 function getSchoolTermForClass(c: TClassTable): TSchoolTermTable | undefined {
