@@ -23,6 +23,7 @@ import {
 } from './tables';
 
 export type TTrackModel = TTrackTable & {
+  readonly link: string;
   readonly artistNames: string[];
 };
 

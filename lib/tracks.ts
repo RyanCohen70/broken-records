@@ -3,6 +3,8 @@ import type {
   TPerformanceTable,
   TStudentTable,
 } from './typedefs/tables';
+
+//import {_} from 'lodash';
 import { loadData } from './loadData';
 import { TTrackModel } from './typedefs/models';
 
@@ -10,7 +12,7 @@ const tracks = loadData<TTrackTable[]>('tracks');
 const performances = loadData<TPerformanceTable[]>('performances');
 const artists = loadData<TStudentTable[]>('students');
 
-function getArtistsforTracks(track: TTrackTable): string[] {
+function getArtistsForTrack(track: TTrackTable): string[] {
   const p = performances.find(
     (p: TPerformanceTable) => p.trackTitle === track.title
   );
@@ -19,6 +21,16 @@ function getArtistsforTracks(track: TTrackTable): string[] {
   artists.filter((a: TStudentTable) => a.id === p.studentId);
   const artistNames = artists.map(a => `${a.firstName} ${a.lastName}`);
   return artistNames;
+}
+
+function getLinkForTrack(track: TTrackTable): string {
+  const path: string = track.title
+    .toLowerCase()
+    .replace(/\(.+\)/, '')
+    .trim()
+    .replaceAll(' ', '-');
+  const link: string = `https://soundcloud.com/bush-upper-school-music/` + path;
+  return link;
 }
 
 export function getTrackModel(
@@ -31,7 +43,8 @@ export function getTrackModel(
     .sort((a, b) => (a.title > b.title ? 1 : -1));
   const trackModel: TTrackModel[] = filteredTracks.map(track => ({
     ...track,
-    artistNames: getArtistsforTracks(track),
+    link: getLinkForTrack(track),
+    artistNames: getArtistsForTrack(track),
   }));
   //console.log(location, 'trackModel =>', trackModel);
   return trackModel;
