@@ -24,11 +24,11 @@ function getArtistsForTrack(track: TTrackTable): string[] {
 }
 
 function getLinkForTrack({ title = '' }: TTrackTable): string {
-  const path = title
-    .toLowerCase()
-    .replace(/\(.+\)/, '')
-    .trim()
-    .replaceAll(' ', '-');
+  const pathLo = title.toLowerCase();
+  const pathParen = pathLo.replace(/\(.+\)/, '');
+  const pathTrim = pathParen.trim();
+  const pathReplace = pathTrim.replace(' ', '-');
+  const path = pathReplace;
   const link = `https://soundcloud.com/bush-upper-school-music/${path}`;
   return link;
 }
