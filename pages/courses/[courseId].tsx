@@ -2,8 +2,9 @@ import type { GetStaticProps, GetStaticPaths } from 'next';
 import type { TTrackModel, TCourseModel } from '../../lib/typedefs/models';
 import type { TCourseTable } from '../../lib/typedefs/tables';
 
-import Layout from '../../components/layout';
-import { Nav, TSecondaryNavEntry } from '../../components/Nav';
+import Page from '../../components/page';
+
+import { TSecondaryNavEntry } from '../../components/Nav';
 import { TrackList } from '../../components/track';
 import {
   getAllCourseIds,
@@ -56,7 +57,7 @@ type TCourseProps = {
 };
 
 export default function Course({ courseModel, courses }: TCourseProps) {
-  function secondaryNavEntryFromCourse({
+  function calcSecondaryNavEntry({
     id,
     label,
   }: TCourseTable): TSecondaryNavEntry {
@@ -68,27 +69,22 @@ export default function Course({ courseModel, courses }: TCourseProps) {
     };
   }
   return (
-    <Layout>
-      <div className='container'>
-        <Nav
-          secondaryNavEntries={courses.map(secondaryNavEntryFromCourse)}
-          primarySelectedId={'class'}
-        />
-        <div className='column main'>
-          <h2 className='main-title-primary'>{courseModel.label}</h2>
-          <p>{courseModel.description}</p>
-          <div>
-            {courseModel.classes.map(c => (
-              <ClassSection
-                key={c.id}
-                yearLabel={c.yearLabel}
-                termLabel={c.termLabel}
-                tracks={c.tracks}
-              />
-            ))}
-          </div>
-        </div>
+    <Page
+      pageType={'class'}
+      secondaryNavEntries={courses.map(calcSecondaryNavEntry)}
+    >
+      <h2 className='main-title-primary'>{courseModel.label}</h2>
+      <p>{courseModel.description}</p>
+      <div>
+        {courseModel.classes.map(c => (
+          <ClassSection
+            key={c.id}
+            yearLabel={c.yearLabel}
+            termLabel={c.termLabel}
+            tracks={c.tracks}
+          />
+        ))}
       </div>
-    </Layout>
+    </Page>
   );
 }

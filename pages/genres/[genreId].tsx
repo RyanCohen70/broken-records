@@ -2,8 +2,8 @@ import type { GetStaticProps, GetStaticPaths } from 'next';
 import type { TTrackModel, TGenreModel } from '../../lib/typedefs/models';
 import type { TGenreTable } from '../../lib/typedefs/tables';
 
-import Layout from '../../components/layout';
-import { Nav, TSecondaryNavEntry } from '../../components/Nav';
+import Page from '../../components/page';
+import { TSecondaryNavEntry } from '../../components/Nav';
 import { TrackList } from '../../components/track';
 import { getAllGenreIds, getAllGenres, getGenreModel } from '../../lib/genres';
 
@@ -50,7 +50,7 @@ type TGenreProps = {
 };
 
 export default function Genre({ genreModel, genres }: TGenreProps) {
-  function secondaryNavEntryFromCourse({
+  function calcSecondaryNavEntry({
     id,
     label,
   }: TGenreTable): TSecondaryNavEntry {
@@ -62,25 +62,16 @@ export default function Genre({ genreModel, genres }: TGenreProps) {
     };
   }
   return (
-    <Layout>
-      <div className='container'>
-        <Nav
-          secondaryNavEntries={genres.map(secondaryNavEntryFromCourse)}
-          primarySelectedId={'genre'}
-        />
-        <div className='column main'>
-          <h2 className='main-title-primary'>{genreModel.label}</h2>
-          <div>
-            {genreModel.schoolYears.map(year => (
-              <YearSection
-                key={year.id}
-                yearLabel={year.id}
-                tracks={year.tracks}
-              />
-            ))}
-          </div>
-        </div>
+    <Page
+      pageType={'genre'}
+      secondaryNavEntries={genres.map(calcSecondaryNavEntry)}
+    >
+      <h2 className='main-title-primary'>{genreModel.label}</h2>
+      <div>
+        {genreModel.schoolYears.map(year => (
+          <YearSection key={year.id} yearLabel={year.id} tracks={year.tracks} />
+        ))}
       </div>
-    </Layout>
+    </Page>
   );
 }

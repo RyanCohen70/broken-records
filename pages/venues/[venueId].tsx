@@ -2,8 +2,8 @@ import type { GetStaticProps, GetStaticPaths } from 'next';
 import type { TTrackModel, TVenueModel } from '../../lib/typedefs/models';
 import type { TVenueTable } from '../../lib/typedefs/tables';
 
-import Layout from '../../components/layout';
-import { Nav, TSecondaryNavEntry } from '../../components/Nav';
+import Page from '../../components/page';
+import { TSecondaryNavEntry } from '../../components/Nav';
 import { TrackList } from '../../components/track';
 import { getAllVenueIds, getAllVenues, getVenueModel } from '../../lib/venues';
 
@@ -50,7 +50,7 @@ type TVenueProps = {
 };
 
 export default function Venue({ venueModel, venues }: TVenueProps) {
-  function secondaryNavEntryFromCourse({
+  function calcSecondaryNavEntry({
     id,
     label,
   }: TVenueTable): TSecondaryNavEntry {
@@ -62,26 +62,19 @@ export default function Venue({ venueModel, venues }: TVenueProps) {
     };
   }
   return (
-    <Layout>
-      <div className='container'>
-        <Nav
-          secondaryNavEntries={venues.map(secondaryNavEntryFromCourse)}
-          primarySelectedId={'venue'}
-        />
-        <div className='column main'>
-          <h2>
-            <span className='main-title-primary'> {venueModel.label}</span>
-            <span className='main-title-secondary'>
-              {venueModel.termYearLabel}
-            </span>
-          </h2>
-          <div>
-            {venueModel.classes.map(c => (
-              <ClassSection key={c.id} label={c.label} tracks={c.tracks} />
-            ))}
-          </div>
-        </div>
+    <Page
+      pageType={'venue'}
+      secondaryNavEntries={venues.map(calcSecondaryNavEntry)}
+    >
+      <h2>
+        <span className='main-title-primary'> {venueModel.label}</span>
+        <span className='main-title-secondary'>{venueModel.termYearLabel}</span>
+      </h2>
+      <div>
+        {venueModel.classes.map(c => (
+          <ClassSection key={c.id} label={c.label} tracks={c.tracks} />
+        ))}
       </div>
-    </Layout>
+    </Page>
   );
 }

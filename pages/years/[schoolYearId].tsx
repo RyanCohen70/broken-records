@@ -2,8 +2,8 @@ import type { GetStaticProps, GetStaticPaths } from 'next';
 import type { TTrackModel, TSchoolYearModel } from '../../lib/typedefs/models';
 import type { TSchoolYearTable } from '../../lib/typedefs/tables';
 
-import Layout from '../../components/layout';
-import { Nav, TSecondaryNavEntry } from '../../components/Nav';
+import Page from '../../components/page';
+import { TSecondaryNavEntry } from '../../components/Nav';
 import { TrackList } from '../../components/track';
 import {
   getAllSchoolYearIds,
@@ -57,9 +57,7 @@ export default function SchoolYear({
   schoolYearModel,
   schoolYears,
 }: TSchoolYearProps) {
-  function secondaryNavEntryFromCourse({
-    id,
-  }: TSchoolYearTable): TSecondaryNavEntry {
+  function calcSecondaryNavEntry({ id }: TSchoolYearTable): TSecondaryNavEntry {
     return {
       id,
       label: id,
@@ -68,25 +66,20 @@ export default function SchoolYear({
     };
   }
   return (
-    <Layout>
-      <div className='container'>
-        <Nav
-          secondaryNavEntries={schoolYears.map(secondaryNavEntryFromCourse)}
-          primarySelectedId={'year'}
-        />
-        <div className='column main'>
-          <h2 className='main-title-primary'>{schoolYearModel.id}</h2>
-          <div>
-            {schoolYearModel.terms.map(term => (
-              <SchoolTermSection
-                key={term.id}
-                label={term.label}
-                tracks={term.tracks}
-              />
-            ))}
-          </div>
-        </div>
+    <Page
+      pageType={'year'}
+      secondaryNavEntries={schoolYears.map(calcSecondaryNavEntry)}
+    >
+      <h2 className='main-title-primary'>{schoolYearModel.id}</h2>
+      <div>
+        {schoolYearModel.terms.map(term => (
+          <SchoolTermSection
+            key={term.id}
+            label={term.label}
+            tracks={term.tracks}
+          />
+        ))}
       </div>
-    </Layout>
+    </Page>
   );
 }

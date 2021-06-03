@@ -79,16 +79,18 @@ type TSecondaryNavProps = {
 
 function SecondaryNav({ entries }: TSecondaryNavProps) {
   return (
-    <div className='nav-menu2'>
-      {entries.map(entry => (
-        <SecondaryNavEntry
-          key={entry.id}
-          id={entry.id}
-          label={entry.label}
-          path={entry.path}
-          isSelected={entry.isSelected}
-        />
-      ))}
+    <div className='nav-menu2-container'>
+      <div className='nav-menu2'>
+        {entries.map(entry => (
+          <SecondaryNavEntry
+            key={entry.id}
+            id={entry.id}
+            label={entry.label}
+            path={entry.path}
+            isSelected={entry.isSelected}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -106,7 +108,6 @@ export function Nav({ secondaryNavEntries, primarySelectedId }: TNavProps) {
         entries={calcPrimaryNavEntries(primarySelectedId)}
         selectedId={primarySelectedId}
       />
-      <hr />
       <SecondaryNav entries={secondaryNavEntries} />
     </div>
   );
