@@ -24,7 +24,10 @@ function getArtistsForTrack(track: TTrackTable): string[] {
 }
 
 function getLinkForTrack(track: TTrackTable): string {
-  const path = track.title
+  if (!track.title) {
+    return '';
+  }
+  const path: string = track.title
     .toLowerCase()
     .replace(/\(.+\)/, '')
     .trim()
