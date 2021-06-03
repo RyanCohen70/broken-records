@@ -23,16 +23,13 @@ function getArtistsForTrack(track: TTrackTable): string[] {
   return artistNames;
 }
 
-function getLinkForTrack(track: TTrackTable): string {
-  if (!track.title) {
-    return '';
-  }
-  const path: string = track.title
+function getLinkForTrack({ title = '' }: TTrackTable): string {
+  const path = title
     .toLowerCase()
     .replace(/\(.+\)/, '')
     .trim()
     .replaceAll(' ', '-');
-  const link: string = `https://soundcloud.com/bush-upper-school-music/` + path;
+  const link = `https://soundcloud.com/bush-upper-school-music/${path}`;
   return link;
 }
 
