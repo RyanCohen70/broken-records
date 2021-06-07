@@ -25,7 +25,7 @@ export function getAllCourseIds() {
 }
 
 export function getAllCourses() {
-  return courses.sort((a, b) => (a.label > b.label ? 1 : -1));
+  return courses.sort((a, b) => (a.id > b.id ? 1 : -1));
 }
 
 function getClassesForCourse(courseId: TCourseId): TClassTable[] {
@@ -43,17 +43,19 @@ function getSchoolTermForClass(c: TClassTable): TSchoolTermTable | undefined {
 
 function getClassModel(courseId: TCourseId): TClassModel[] {
   const classesForCourse: TClassTable[] = getClassesForCourse(courseId);
-  const classModel: TClassModel[] = classesForCourse.map(c => {
-    const schoolTerm = getSchoolTermForClass(c);
-    const tracks = getTrackModel('classModel', 'classId', c.id);
-    //onsole.log('course Tracks for', c.id, '=>', tracks);
-    return {
-      id: c.id,
-      yearLabel: schoolTerm?.schoolYearId ?? ('' as TSchoolYearId),
-      termLabel: schoolTerm?.termLabel ?? '',
-      tracks: tracks,
-    };
-  });
+  const classModel: TClassModel[] = classesForCourse
+    .map(c => {
+      const schoolTerm = getSchoolTermForClass(c);
+      const tracks = getTrackModel('classModel', 'classId', c.id);
+      return {
+        id: c.id,
+        yearLabel: schoolTerm?.schoolYearId ?? ('' as TSchoolYearId),
+        termLabel: schoolTerm?.termLabel ?? '',
+        tracks: tracks,
+      };
+    })
+    .filter(model => model.tracks.length > 0);
+
   return classModel;
 }
 

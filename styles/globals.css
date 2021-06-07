@@ -1,50 +1,129 @@
+:root {
+  --light: #ffffe2;
+
+  --blue-1: #3f4c9c;
+  --blue-2: #3d4787;
+  --blue-3: #394372;
+  --blue-4: #383d5d;
+  --blue-5: #353948;
+
+  --red-1: #fd6139;
+  --red-2: #d55939;
+  --red-3: #ad5038;
+  --red-4: #844637;
+  --red-5: #5c3d35;
+
+  --green-1: #73a502;
+  --green-2: #668e19;
+  --green-3: #5a7825;
+  --green-4: #4d602b;
+  --green-5: #404a30;
+
+  --seafoam-1: #c7d6bc;
+  --seafoam-2: #aab6a0;
+  --seafoam-3: #8c9584;
+  --seafoam-4: #6e746a;
+  --seafoam-5: #50534f;
+
+  --text-primary: var(--seafoam-1);
+  --text-primary-hover: var(--seafoam-3);
+  --text-secondary: var(--seafoam-2);
+}
+
 * {
   margin: 0;
   font-family: Lato, sans-serif;
-  color: #333;
   box-sizing: border-box;
 }
 a {
   text-decoration: none;
-  color: inherit;
 }
 h1 {
-  height: 85px;
-  padding: 15px;
-  color: peachpuff;
+  height: 110px;
+  padding: 0 15px 5px;
+  color: var(--text-primary);
   font-size: 48px;
   font-weight: 900;
-  background-image: url('/HeaderBackground.jpg');
-  background-color: powderblue;
+  text-align: center;
+  background: linear-gradient(
+    90deg,
+    var(--blue-2),
+    var(--seafoam-1),
+    var(--blue-1)
+  );
+}
+h1.unused {
+  background: linear-gradient(175deg, var(--red-1), var(--seafoam-1)),
+    linear-gradient(var(--blue-1), var(--red-1)),
+    linear-gradient(336deg, rgba(0, 0, 255, 0.8), rgba(0, 0, 255, 0) 70.71%);
+  background: url('/MultiGradientBackgroundThin2.jpg') no-repeat;
+  background-size: cover;
+  background: linear-gradient(#e66465, #9198e5);
+}
+h1 svg {
+  height: 100px;
 }
 h2 {
+  letter-spacing: 1px;
 }
 h3 {
   margin: 30px 0 10px;
 }
 p {
   margin: 10px 0;
+  line-height: 1.5;
 }
-hr {
-  margin: 10px 0;
-  border-color: powderblue;
+
+nav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 20px;
+  height: 60px;
+  padding: 10px 0;
+  background: linear-gradient(0deg, var(--blue-3), var(--blue-1));
 }
+.nav-item {
+  margin: 0 10px;
+}
+
+.nav-item a {
+  color: var(--text-primary);
+}
+
+.home-page-main {
+  min-height: calc(100vh - 310px);
+  background: url('/MultiGradientBackground1.jpg') no-repeat;
+  background-size: cover;
+}
+.video {
+  padding: 100px 0 200px;
+  text-align: center;
+}
+
 .container {
   display: flex;
   justify-content: flex-start;
-  height: calc(100vh - 85px);
+  height: calc(100vh - 100px);
+  border-top: solid var(--blue-3) 2px;
 }
+
 .main {
-  background-color: papayawhip;
   width: calc(100vw - 250px);
   padding: 20px;
   overflow-y: auto;
+  color: var(--text-primary);
+  background: linear-gradient(var(--blue-3), var(--blue-1));
+}
+
+.main a {
+  color: var(--text-primary);
 }
 
 .nav {
-  width: 250px;
-  background-color: peachpuff;
-  height: calc(100vh - 85px);
+  width: max(250px, 20%);
+  height: calc(100vh - 100px);
+  background: linear-gradient(var(--blue-3), var(--blue-5));
 }
 
 .selected {
@@ -57,13 +136,28 @@ hr {
   font-size: 20px;
   height: 50px;
   padding: 10px 0;
-  border-bottom: 1px solid powderblue;
 }
+
+.type-class .nav-menu1 {
+  border-bottom: 1px solid var(--blue-1);
+}
+.type-year .nav-menu1 {
+  border-bottom: 1px solid var(--blue-1);
+}
+.type-venue .nav-menu1 {
+  border-bottom: 1px solid var(--blue-1);
+}
+
 .nav-menu1-item {
   margin: 0 10px;
 }
-.nav-menu1-item:hover:not(.selected) {
-  color: #666;
+
+.nav-menu1-item a {
+  color: var(--text-primary);
+}
+
+.nav-menu1-item:hover:not(.selected) a {
+  color: var(--text-primary-hover);
   cursor: pointer;
 }
 
@@ -73,21 +167,25 @@ hr {
 }
 
 .nav-menu2 {
-  padding: 10px;
+  padding: 10px 30px;
+}
+
+.nav-menu2-item a {
+  color: var(--text-primary);
 }
 .nav-menu2-item {
   font-size: 16px;
   margin: 10px 0;
 }
-.nav-menu2-item:hover:not(.selected) {
-  color: #666;
+.nav-menu2-item:hover:not(.selected) a {
+  color: var(--text-primary-hover);
   cursor: pointer;
 }
 .main-title-primary {
   font-weight: 800;
 }
 .main-title-secondary {
-  color: #666;
+  color: var(--text-secondary);
   margin-left: 10px;
   font-weight: 400;
 }
@@ -107,15 +205,53 @@ hr {
 .track-name {
   font-weight: 400;
   font-size: 16px;
-  color: #333;
+  color: var(--text-secondary);
 }
 .track-artists {
   font-weight: 400;
   font-size: 14px;
-  color: #666;
+  color: var(--text-secondary);
   margin: 0 10px;
 }
 .play-icon {
-  fill: #666;
+  fill: var(--seafoam-3);
   margin: 0 5px;
+}
+
+.broken-records-logo {
+  fill: var(--blue-1);
+}
+
+.full-logo {
+  padding: 20px;
+  text-align: center;
+  height: 250px;
+  background: linear-gradient(
+    90deg,
+    var(--blue-2),
+    var(--seafoam-1),
+    var(--blue-1)
+  );
+  fill: var(--blue-1);
+}
+
+.full-logo svg {
+  width: 300px;
+}
+
+.about {
+  text-align: center;
+  padding: 50px 0 5px;
+  color: var(--blue-1);
+}
+.about-description {
+  text-align: center;
+  padding: 0 500px;
+  color: var(--blue-5);
+}
+.creator {
+  text-align: center;
+  color: var(--seafoam-1);
+  padding: 10px;
+  background: linear-gradient(var(--blue-1), var(--blue-3));
 }

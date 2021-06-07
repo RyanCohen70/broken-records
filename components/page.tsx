@@ -14,7 +14,7 @@ export default function Page({
 }: TPageProps) {
   return (
     <Layout>
-      <div className='container'>
+      <div className={`container type-${pageType}`}>
         <Nav
           primarySelectedId={pageType}
           secondaryNavEntries={secondaryNavEntries}

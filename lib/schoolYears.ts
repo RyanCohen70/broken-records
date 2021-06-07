@@ -17,6 +17,14 @@ export function getAllSchoolYearIds() {
   });
 }
 
+/*
+function filterSchoolYears(){
+  schoolYears.forEach((year: TSchoolYearTable) => {
+    return [terms: getSchoolTermModel(year.id)]
+  })
+}
+//*/
+
 export function getAllSchoolYears() {
   return schoolYears.sort((a, b) => (a.id > b.id ? -1 : 1));
 }
@@ -32,13 +40,15 @@ function getSchoolTermsForYear(
 function getSchoolTermModel(schoolYearId: TSchoolYearId): TSchoolTermModel[] {
   const schoolTermsForYear: TSchoolTermTable[] =
     getSchoolTermsForYear(schoolYearId);
-  const schoolTermModel: TSchoolTermModel[] = schoolTermsForYear.map(term => {
-    return {
-      id: term.id,
-      label: term.termLabel,
-      tracks: getTrackModel('schoolTermModel', 'schoolTermId', term.id),
-    };
-  });
+  const schoolTermModel: TSchoolTermModel[] = schoolTermsForYear
+    .map(term => {
+      return {
+        id: term.id,
+        label: term.termLabel,
+        tracks: getTrackModel('schoolTermModel', 'schoolTermId', term.id),
+      };
+    })
+    .filter(model => model.tracks.length > 0);
   return schoolTermModel;
 }
 
