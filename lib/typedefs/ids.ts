@@ -1,7 +1,7 @@
 import { Nominal } from './nominal';
 
 const enum TrackTag {}
-const enum StudentTag {}
+const enum ArtistTag {}
 const enum CourseTag {}
 const enum ClassTag {}
 const enum SchoolYearTag {}
@@ -11,7 +11,7 @@ const enum GenreTag {}
 const enum AssetTag {}
 
 export type TTrackId = Nominal<string, TrackTag>;
-export type TStudentId = Nominal<string, StudentTag>;
+export type TArtistId = Nominal<string, ArtistTag>;
 
 export type TCourseId = Nominal<string, CourseTag>;
 export type TClassId = Nominal<string, ClassTag>;

@@ -14,14 +14,18 @@ console.log('turkeyman rules', { apiKey, dbKey });
 async function fetchRecords(tableName, fields) {
   const records = [];
   const base = new Airtable({ apiKey }).base(dbKey);
-  console.log('fetchCourses =>', base);
+  console.log('fetchRecords =>', tableName);
 
   function page(rs, fetchNextPage) {
     rs.forEach(r => records.push(r.fields));
     fetchNextPage();
   }
 
-  await base(tableName).select({ fields }).eachPage(page);
+  try {
+    await base(tableName).select({ fields }).eachPage(page);
+  } catch (ex) {
+    console.log('err =>', tableName, ex);
+  }
 
   function flattenRecord(record) {
     const obj = {};
@@ -56,10 +60,10 @@ const tables = [
     ],
   },
   {
-    name: 'students',
-    fields: ['id', 'first_name', 'last_name', 'graduation_year'],
+    name: 'artists',
+    fields: ['id', 'first_name', 'last_initial', 'graduation_year'],
   },
-  { name: 'performances', fields: ['student_id', 'track_title'] },
+  { name: 'performances', fields: ['artist_id', 'track_title'] },
 
   { name: 'courses', fields: ['id', 'label', 'description'] },
   { name: 'classes', fields: ['id', 'course_id', 'school_term_id'] },

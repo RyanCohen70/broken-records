@@ -1,6 +1,6 @@
 import {
   TTrackId,
-  TStudentId,
+  TArtistId,
   TCourseId,
   TClassId,
   TSchoolYearId,
@@ -12,7 +12,7 @@ import {
 
 import {
   TTrackTable,
-  TStudentTable,
+  TArtistTable,
   TCourseTable,
   TClassTable,
   TSchoolYearTable,

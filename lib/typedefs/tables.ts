@@ -1,5 +1,5 @@
 import {
-  TStudentId,
+  TArtistId,
   TCourseId,
   TClassId,
   TSchoolYearId,
@@ -19,28 +19,28 @@ export type TTrackTable = {
   readonly isMastered: boolean;
 };
 
-export type TStudentTable = {
-  readonly id: TStudentId;
+export type TArtistTable = {
+  readonly id: TArtistId;
   readonly firstName: string;
-  readonly lastName: string;
+  readonly lastInitial: CharacterData;
   readonly graduationYear: TSchoolYearId;
 };
 
 export type TPerformanceTable = {
-  readonly studentId: TStudentId;
+  readonly artistId: TArtistId;
   readonly trackTitle: 'string';
-};
-
-export type TCourseTable = {
-  readonly id: TCourseId;
-  readonly label: string;
-  readonly description: string;
 };
 
 export type TClassTable = {
   readonly id: TClassId;
   readonly courseId: TCourseId;
   readonly schoolTermId: TSchoolTermId;
+};
+
+export type TCourseTable = {
+  readonly id: TCourseId;
+  readonly label: string;
+  readonly description: string;
 };
 
 export type TSchoolYearTable = {

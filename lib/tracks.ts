@@ -1,7 +1,7 @@
 import type {
   TTrackTable,
   TPerformanceTable,
-  TStudentTable,
+  TArtistTable,
 } from './typedefs/tables';
 
 //import {_} from 'lodash';
@@ -10,7 +10,7 @@ import { TTrackModel } from './typedefs/models';
 
 const tracks = loadData<TTrackTable[]>('tracks');
 const performances = loadData<TPerformanceTable[]>('performances');
-const artists = loadData<TStudentTable[]>('students');
+const artists = loadData<TArtistTable[]>('artists');
 
 function getArtistsForTrack(track: TTrackTable): string[] {
   const p = performances.find(
@@ -18,12 +18,12 @@ function getArtistsForTrack(track: TTrackTable): string[] {
   );
   if (!p) return [];
 
-  artists.filter((a: TStudentTable) => a.id === p.studentId);
-  const artistNames = artists.map(a => `${a.firstName} ${a.lastName}`);
+  artists.filter((a: TArtistTable) => a.id === p.artistId);
+  const artistNames = artists.map(a => `${a.firstName} ${a.lastInitial}`);
   return artistNames;
 }
 
-function getLinkForTrack({ title = '' }: TTrackTable): string {
+function getLinkForTrack({ title = '', filename }: TTrackTable): string {
   const path = title
     .toLowerCase()
     .replace(/\(.+\)/, '')
