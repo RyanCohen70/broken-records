@@ -536,7 +536,7 @@ export default function Home() {
       <Nav />
       <div className='home-page-main'>
         <div>
-          <h2 className='about'>ABOUT</h2>
+          <h2 className='about'>BROKEN RECORDS</h2>
           <p className='about-description'>
             Broken Records is the Bush School Record Label. Since 2003, students
             in the Upper School Music Department have been creating and
@@ -552,7 +552,7 @@ export default function Home() {
             crossOrigin='anonymous'
             autoPlay={true}
             preload='auto'
-            src='/BrokenRecordsIntroVideo.mp4'
+            src='/BrokenRecordsIntroVideo540.mp4'
           >
             Sorry, your browser doesn't support embedded videos.
           </video>
